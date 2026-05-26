@@ -1,59 +1,172 @@
-Network Topology & Routing
-1.	Redundancy and Scalability:
-o	Redundancy: The two-router setup provides redundancy in case one router fails. If Router 1 goes down, Router 2 can still route traffic between Office 3 and Office 4. Similarly, if Router 2 fails, Router 1 ensures connectivity between Office 1 and Office 2. This prevents a single point of failure from crippling the entire network.
-o	Scalability: The two routers allow the network to grow more easily. As more offices or devices are added, the workload can be distributed between the routers. This also allows for more efficient routing decisions and potentially better performance compared to a single router handling all traffic.
-2.	Different Subnets:
-o	Using different subnets for each office provides network segmentation. This has several advantages: 
-	Broadcast Domain Control: Broadcast traffic is contained within each subnet, reducing congestion and improving performance.
-	Security: Isolating networks prevents unauthorized access from one office to another.
-	Simplified Management: Separate subnets allow for easier IP address management and troubleshooting.
-	Logical Organization: It mirrors the physical organization of the offices, making it easier to understand and manage the network.
-3.	Fiber Link Between Routers:
-o	Fiber optic links offer high bandwidth and low latency compared to copper cables. This translates to: 
-	Faster Data Transfer: Large amounts of data can be transferred quickly between offices.
-	Improved Performance: Applications that require high bandwidth or low latency, such as video conferencing or large file transfers, will perform better.
-	Longer Distances: Fiber can transmit data over longer distances without signal degradation, which is beneficial if the offices are far apart.
-	Reduced Interference: Fiber is immune to electromagnetic interference, ensuring a more reliable connection.
-Security Considerations
-1.	Security Risks of Cross-Office Communication:
-o	Unauthorized Access: If all PCs can communicate freely, a compromised PC in one office could be used to access sensitive data in another office.
-o	Malware Propagation: Malware could spread more easily across the entire network.
-o	Data Breaches: Sensitive data could be intercepted or stolen more easily.
-o	Denial of Service (DoS) Attacks: A DoS attack launched from one office could affect the entire network.
-2.	Firewall Rules:
-o	Rule 1: Deny all traffic between subnets by default. This implements a "default deny" policy, ensuring that only explicitly allowed traffic can pass between offices.
-o	Rule 2: Allow specific traffic between subnets based on application requirements. For example, allow HTTP/HTTPS traffic between specific servers and clients in different offices for web application access.
-3.	VLANs (Virtual Local Area Networks):
-o	Security: VLANs can create logical network segments within each office, further isolating devices and preventing unauthorized access. For example, separate VLANs could be created for different departments or device types.
-o	Traffic Management: VLANs can be used to prioritize traffic and improve network performance. For example, voice traffic could be placed on a separate VLAN with higher priority to ensure quality.
-o	Simplified Administration: VLANs make it easier to manage network resources and apply security policies.
-Practical Network Troubleshooting
-A PC in Office 3 cannot ping a PC in Office 1.
-1.	Possible Reasons:
-o	IP Address Configuration Issues: The PC in Office 3 or Office 1 might have incorrect IP address, subnet mask, or default gateway settings.
-o	Router Configuration Errors: The routers might not be configured to route traffic between the subnets of Office 1 and Office 3.
-o	Firewall Blocking Traffic: A firewall on one of the PCs or routers might be blocking ICMP traffic (used by ping).
-2.	Troubleshooting Steps:
-o	Verify IP Configuration: Check the IP address, subnet mask, and default gateway settings on both PCs using ipconfig (Windows) or ifconfig (Linux/macOS).
-o	Check Router Configuration: Verify that the routers are configured to route traffic between the subnets of Office 1 and Office 3. Use commands like show ip route on Cisco routers to check the routing table.
-o	Test Connectivity Between Routers: Ping the interface of Router 1 from Router 2 and vice versa to ensure connectivity between the routers.
-o	Check Firewall Rules: Temporarily disable firewalls on the PCs and routers to see if they are blocking traffic.
-o	Traceroute: Use tracert (Windows) or traceroute (Linux/macOS) to identify where the traffic is being blocked.
-3.	Router Failure:
-o	If one router fails, communication will still be possible between the offices connected to the remaining operational router.
-o	For example, if Router 1 fails, communication between Office 3 and Office 4 will still be possible through Router 2. However, Office 1 and Office 2 will be isolated from the rest of the network.
-Real-World Applications
-Additional Components for Improvement:
-1.	Security:
-o	Firewalls: Implement dedicated firewalls at the network perimeter to filter traffic and prevent unauthorized access.
-o	Intrusion Detection/Prevention Systems (IDS/IPS): Deploy IDS/IPS to detect and prevent malicious activity.
-o	Virtual Private Networks (VPNs): Use VPNs to provide secure remote access for employees.
-o	Access Control Lists (ACLs): Implement ACLs on routers and switches to control traffic flow based on source and destination IP addresses, ports, and protocols.
-o	Security Information and Event Management (SIEM) System: Deploy a SIEM system to collect and analyze security logs from various devices and applications.
-2.	Performance:
-o	Load Balancers: Distribute traffic across multiple servers to improve performance and availability.
-o	Redundant Links: Implement redundant links between routers and switches to provide failover in case of link failures.
-o	Quality of Service (QoS): Implement QoS to prioritize critical traffic, such as voice and video, over less important traffic.
-o	Content Delivery Networks (CDNs): Use CDNs to cache frequently accessed content closer to users, reducing latency and improving performance.
-o	Network Monitoring Tools: Deploy network monitoring tools to track network performance and identify bottlenecks.
+# Network Topology & Routing | Cisco Packet Tracer
 
+A comprehensive **enterprise-scale network design** project demonstrating advanced networking concepts including redundancy, security, and performance optimization across multiple office locations.
+
+---
+
+## 🎯 Project Overview
+
+This project showcases a **multi-office network infrastructure** with:
+- ✅ **Redundant router architecture** for high availability
+- ✅ **Subnet segmentation** for security and organization
+- ✅ **Fiber optic backbone** for high-speed inter-office communication
+- ✅ **Network security policies** and firewall rules
+- ✅ **Practical troubleshooting** and disaster recovery planning
+
+**Skills Demonstrated:** Network Design • Cisco IOS • Routing Protocols • Network Security • Redundancy Planning
+
+---
+
+## 📋 Project Structure
+
+| File | Description |
+|------|-------------|
+| `4351139_Nwariwe.pkt` | Cisco Packet Tracer simulation file (13MB) |
+| `4351139_Nwariwe(Packet Tracer Activity 2).docx` | Detailed technical documentation |
+| `README.md` | This file |
+
+---
+
+## 🏗️ Network Architecture
+
+### Core Design Features
+
+#### **1. Redundancy & Scalability**
+- **Two-router setup** ensures continuous operation if one router fails
+- Workload distribution between Router 1 and Router 2
+- Failover capability maintaining office connectivity
+- Scalable design supporting network growth
+
+#### **2. Subnet Segmentation**
+Strategic subnet separation provides:
+- 🔒 **Security:** Isolation prevents unauthorized cross-office access
+- 📡 **Performance:** Limited broadcast domains reduce network congestion
+- 🛠️ **Management:** Simplified troubleshooting and IP address management
+- 📊 **Organization:** Logical mirroring of physical office structure
+
+#### **3. High-Speed Fiber Backbone**
+Fiber optic links between routers deliver:
+- 🚀 Fast data transfer rates
+- ⏱️ Low latency for latency-sensitive applications
+- 📏 Long-distance transmission without signal degradation
+- 🛡️ Electromagnetic interference immunity
+
+---
+
+## 🔐 Security Implementation
+
+### Firewall Rules & Access Control
+```
+Rule 1: Deny all inter-subnet traffic by default (Zero-Trust Model)
+Rule 2: Allow only explicitly authorized traffic based on business needs
+```
+
+### Defense-in-Depth Strategies
+- **Network Segmentation:** VLANs create logical boundaries within offices
+- **Traffic Prioritization:** QoS ensures critical applications maintain performance
+- **Access Control:** ACLs restrict traffic flow by source/destination
+
+### Additional Security Components
+- Firewalls at network perimeter
+- Intrusion Detection/Prevention Systems (IDS/IPS)
+- Virtual Private Networks (VPNs)
+- Security Information & Event Management (SIEM)
+
+---
+
+## 🔧 Network Troubleshooting & Diagnostics
+
+### Common Scenario: Cross-Office Connectivity Issues
+
+**Problem:** PC in Office 3 cannot reach PC in Office 1
+
+**Diagnostic Process:**
+1. ✔️ Verify IP configuration (`ipconfig` / `ifconfig`)
+2. ✔️ Check router configuration (`show ip route`)
+3. ✔️ Test router-to-router connectivity (ping interface)
+4. ✔️ Review firewall rules blocking traffic
+5. ✔️ Trace packet path (`tracert` / `traceroute`)
+
+**Resilience Testing:**
+- Network remains operational if one router fails
+- Connected offices maintain communication through remaining router
+- Office isolation triggers alerts for failover protocols
+
+---
+
+## 📈 Performance Optimization
+
+### Load Balancing & Redundancy
+- **Multiple paths** for traffic distribution
+- **Redundant links** for automatic failover
+- **Quality of Service (QoS)** for priority-based traffic handling
+- **Content Delivery** for bandwidth optimization
+
+### Monitoring & Metrics
+- Real-time network performance tracking
+- Bottleneck identification
+- Capacity planning and scalability analysis
+
+---
+
+## 🛠️ Technology Stack
+
+| Component | Technology |
+|-----------|-----------|
+| **Simulation Platform** | Cisco Packet Tracer |
+| **Routing** | Static & Dynamic Routing Protocols |
+| **Security** | ACLs, Firewall Rules, VLANs |
+| **Infrastructure** | Multi-office topology with fiber backbone |
+
+---
+
+## 💡 Key Learning Outcomes
+
+- [x] Enterprise network design principles
+- [x] High-availability architecture patterns
+- [x] Security policy implementation
+- [x] Network troubleshooting methodology
+- [x] Performance optimization techniques
+- [x] Disaster recovery planning
+
+---
+
+## 📂 Files Included
+
+- **4351139_Nwariwe.pkt** - Full network simulation ready to open in Cisco Packet Tracer
+- **4351139_Nwariwe(Packet Tracer Activity 2).docx** - Comprehensive technical documentation with analysis
+
+---
+
+## 🚀 Getting Started
+
+1. **Install Cisco Packet Tracer** (Free download from Cisco Networking Academy)
+2. **Open** `4351139_Nwariwe.pkt` in Packet Tracer
+3. **Explore** the network topology and device configurations
+4. **Test** connectivity and observe routing behavior
+5. **Review** the documentation for detailed analysis
+
+---
+
+## 📊 Real-World Applications
+
+This project demonstrates principles used in:
+- **Enterprise Networks** - Multi-site corporate infrastructure
+- **Data Centers** - Redundant backbone networks
+- **Telecommunications** - Office location interconnection
+- **ISP Networks** - Multiple Point-of-Presence (PoP) routing
+
+---
+
+## 📝 Notes
+
+This project represents practical application of networking concepts covered in Cisco CCNA curriculum, demonstrating both theoretical knowledge and hands-on configuration skills.
+
+---
+
+**Author:** [Righteous Nwariwe](https://github.com/RighteousNwariwe)  
+**Last Updated:** 2026
+
+---
+
+*Questions about this project? Feel free to reach out!*
